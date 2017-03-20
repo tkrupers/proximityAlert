@@ -1,43 +1,23 @@
 import React, {Component} from 'react';
-import {AppRegistry, NavigatorIOS, TabBarIOS, View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import MapComponent from './components/Map/';
+import {AppRegistry} from 'react-native';
+import {applyMiddleware, createStore} from 'redux';
+import {Provider} from 'react-redux';
+import createLogger from 'redux-logger';
+import thunk from 'redux-thunk';
+import devToolsEnhancer from 'remote-redux-devtools';
+import rootReducer from './reducers';
+import TabBarComponent from './components/TabBar/';
 
-export default class proximityAlert extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedTab: 'map'
-    }
-  }
-  render() {
-    return (
-      <TabBarIOS>
-        <Icon.TabBarItemIOS
-          title="Map"
-          iconName="add-location"
-          selectedIconName="add-location"
-          selected={this.state.selectedTab === 'map'}
-          onPress={() => {
-          this.setState({selectedTab: 'map'});
-        }}>
-          <MapComponent/>
-        </Icon.TabBarItemIOS>
-        <Icon.TabBarItemIOS
-          title="Alarms"
-          iconName="alarm-add"
-          selectedIconName="alarm-add"
-          selected={this.state.selectedTab === 'alarms'}
-          onPress={() => {
-          this.setState({selectedTab: 'alarms'});
-        }}>
-          <View>
-            <Text>Add Place</Text>
-          </View>
-        </Icon.TabBarItemIOS>
-      </TabBarIOS >
-    );
-  }
+const logger = createLogger();
+const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore);
+const store = createStoreWithMiddleware(rootReducer, devToolsEnhancer());
+
+const wrapper = () => {
+  return (
+    <Provider store={store}>
+      <TabBarComponent />
+    </Provider>
+  );
 }
 
-AppRegistry.registerComponent('proximityAlert', () => proximityAlert);
+export default wrapper;

@@ -4,17 +4,9 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React from 'react';
 import {AppRegistry} from 'react-native';
 
-import AppComponent from './src/';
+import AppWrapper from './src/';
 
-export default class proximityAlert extends Component {
-  render() {
-    return (
-      <AppComponent />
-    );
-  }
-}
-
-AppRegistry.registerComponent('proximityAlert', () => proximityAlert);
+AppRegistry.registerComponent('proximityAlert', () => AppWrapper);
