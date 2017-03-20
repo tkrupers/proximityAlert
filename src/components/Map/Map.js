@@ -1,24 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
 import MapView from 'react-native-maps';
 
-const styles = StyleSheet.create({
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  }
-});
+import styles from './style';
 
 class Home extends Component {
-
   constructor() {
     super();
-
-    this.state = {
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -29,8 +17,8 @@ class Home extends Component {
           initRegion: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: Math.max(0, position.coords.latitude),
-            longitudeDelta: Math.max(0, position.coords.longitude)
+            latitudeDelta: 0.043,
+            longitudeDelta: 0.043
           }
         });
       }, (error) => this.setState({error: error.message}), {
@@ -42,13 +30,12 @@ class Home extends Component {
     this.watchID = navigator
       .geolocation
       .watchPosition(position => {
-        console.log(position);
         this.setState({
           currentRegion: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: 0,
-            longitudeDelta: 0
+            latitudeDelta: 0.043,
+            longitudeDelta: 0.043
           }
         });
       })
@@ -66,9 +53,7 @@ class Home extends Component {
       style={styles.map}
       initialRegion={this.state.initRegion}
       region={this.state.currentRegion}
-      loadingEnabled={true}
-
-      />);
+      loadingEnabled={true}/>);
   }
 
 }

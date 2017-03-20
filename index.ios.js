@@ -5,23 +5,14 @@
  */
 
 import React, {Component} from 'react';
-import {AppRegistry, NavigatorIOS, TabBarIOS, View, Text} from 'react-native';
+import {AppRegistry} from 'react-native';
 
-import MapViewComponent from './MapViewComponent';
+import AppComponent from './src/';
 
 export default class proximityAlert extends Component {
   render() {
     return (
-      <TabBarIOS>
-        <TabBarIOS.Item systemIcon="favorites" selected={true}>
-         <MapViewComponent />
-        </TabBarIOS.Item>
-        <TabBarIOS.Item systemIcon="more">
-          <View>
-            <Text>Add Place</Text>
-          </View>
-        </TabBarIOS.Item>
-      </TabBarIOS>
+      <AppComponent />
     );
   }
 }
