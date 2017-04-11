@@ -5,6 +5,7 @@ import {combineReducers} from 'redux';
 const initialState = {
   alarms: [],
   isCreating: false,
+  search: {},
   selectedTab: 'map',
   errors: ''
 }

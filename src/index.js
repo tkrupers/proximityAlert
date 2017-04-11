@@ -6,7 +6,8 @@ import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import devToolsEnhancer from 'remote-redux-devtools';
 import rootReducer from './reducers';
-import TabBarComponent from './components/TabBar/';
+
+import Main from './scenes/';
 
 const logger = createLogger();
 const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore);
@@ -15,7 +16,7 @@ const store = createStoreWithMiddleware(rootReducer, devToolsEnhancer());
 const wrapper = () => {
   return (
     <Provider store={store}>
-      <TabBarComponent />
+      <Main />
     </Provider>
   );
 }
